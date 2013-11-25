@@ -1,7 +1,7 @@
 Getting Started With Podio (Ruby)
 ---------------------------------
 
-Podio is a great collaboration tool with many options for creating your own apps inside the software to handle whatever you may need. In this post I will quickly go over the setup for how to pull data from fields in your Podio apps.
+Podio is a great collaboration tool with many options for creating your own apps to handle whatever you may need. In this post I will quickly go over the setup for how to pull data from fields in your Podio apps.
 
 First up is to install the required gems for Podio.
 ```bash
@@ -22,7 +22,7 @@ Now with Podio there are two ways to authenticate. Authenticate with user and wi
 Podio.client.authenticate_with_app('app_id','app_token')
 ```
 
-To get your app id and token go to the top right corner of Podio, click the wrench, and then click Developer. Here you can see your ID and Token for this app. You can also see any field ID's in case you need them. 
+To get your app id and token go to the top right corner of the Podio app, click the wrench, and click Developer. Here you can see your ID and Token. You can also see any field ID's in case you need them. 
 
 Now that you are authenticated with your Podio app it's time to find the the items and data you are looking for.
 ```bash
@@ -38,7 +38,7 @@ Podio::Item.find_by_filter_values(app_id, created_on:{from:”-7d”,to:”+0d�
 
 This returns an array of information. To get to the first item in your array simple add on [0][0] to the end of the above statement and so on for the second and third ( [0][1] or [0][2] ). Now that you have a single item from your Podio app it's simply drilling down through the arrays and hashes to find the data you are looking for. As an example lets say I have an item with a text field as the second field and a date field as the fourth. So to access those two fields I can do something like this.
 ```bash
-Item = Podio::Item.find_by_filter_values(app_id, created_on:{from:”-7d”,to:”+0d”})[0][1]
+item = Podio::Item.find_by_filter_values(app_id, created_on:{from:”-7d”,to:”+0d”})[0][1]
 text = item.fields[1][“values”][0][“value”][“text”]
 date = item.fields[3][“values][0][“start_date”]
 ```
